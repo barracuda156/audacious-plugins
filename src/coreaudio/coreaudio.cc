@@ -306,6 +306,7 @@ void CoreAudioPlugin::handle_new_default_device(AudioObjectID newID)
     output_instance = nullptr;
 
     init();
+#ifdef __clang__
     if (currentPosition > 0 && currentTime > 0)
     {
         dispatch_block_t restart_playback = ^{
@@ -331,6 +332,7 @@ void CoreAudioPlugin::handle_new_default_device(AudioObjectID newID)
             restart_playback();
         }
     }
+#endif
 }
 
 void CoreAudioPlugin::cleanup ()
